@@ -16,6 +16,19 @@ public interface UserService {
 	public Optional<User> getUser(int id);
 	
 	public Optional<User> login(String username, String password);
+
+	public void changeRole(User user);
+
+	public List<User> getUserByRole(User.Role role);
+
+	public boolean emailExistInDB(String email);
+
+	public boolean usernameExistInDB(String email);
+
+	public List<User> getUsersPag(int offset);
+
+	public int getUsersAmmount();
+
 	
 
 }

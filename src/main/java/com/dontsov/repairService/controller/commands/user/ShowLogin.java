@@ -16,14 +16,16 @@ import com.dontsov.repairService.controller.commands.Command;
  */
 public class ShowLogin implements Command {
 
-    private static final Logger logger = Logger.getLogger(ShowLogin.class);
+	private static final String SUCCESSFUL_PAGE = "/WEB-INF/view/user/login.jsp";
+
+    private static final Logger LOGGER = Logger.getLogger(ShowLogin.class);
 	
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		logger.info("User  entered login view");
+		LOGGER.info("User call ShowLogin");
 		
-		return "/WEB-INF/view/user/login.jsp";
+		return SUCCESSFUL_PAGE;
 	}
 }

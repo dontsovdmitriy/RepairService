@@ -3,22 +3,19 @@ package com.dontsov.repairService.controller.commands.application;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.*;
+
+import org.apache.log4j.Logger;
 
 import com.dontsov.repairService.controller.commands.Command;
-import com.dontsov.repairService.model.MalfunctionType;
 import com.dontsov.repairService.service.ApplicationService;
-import com.dontsov.repairService.service.MalfunctionTypeService;
-import com.dontsov.repairService.service.ReviewService;
 import com.dontsov.repairService.service.impl.ApplicationServiceImpl;
-import com.dontsov.repairService.service.impl.MalfunctionTypeServiceImpl;
-import com.dontsov.repairService.service.impl.ReviewServiceImpl;
-
 
 public class ShowDeleteApplication implements Command {
-	
+
+	private static final String SUCCESSFUL_PAGE = "/WEB-INF/view/application/deleteApplication.jsp";
+	private static final Logger LOGGER = Logger.getLogger(ShowDeleteApplication.class);
+
 	private ApplicationService applicationService;
 
 	public ShowDeleteApplication() {
@@ -33,9 +30,11 @@ public class ShowDeleteApplication implements Command {
 			throws ServletException, IOException {
 		
 		HttpSession session = request.getSession();		
-		session.setAttribute("applicationList", applicationService.getApplications());
+		LOGGER.info("User " + session.getAttribute("user").toString() + " entered showDeleteApplication");
+
+		request.setAttribute("applicationList", applicationService.getApplications());
 		
-		return "/WEB-INF/view/application/deleteApplication.jsp";
+		return SUCCESSFUL_PAGE;
 	}
 
 }

@@ -7,6 +7,7 @@ import javax.servlet.http.*;
 import org.apache.log4j.Logger;
 
 import com.dontsov.repairService.controller.commands.Command;
+import com.dontsov.repairService.controller.validation.*;
 import com.dontsov.repairService.model.User;
 import com.dontsov.repairService.service.UserService;
 import com.dontsov.repairService.service.impl.UserServiceImpl;
@@ -18,20 +19,33 @@ import com.dontsov.repairService.service.impl.UserServiceImpl;
  */
 public class Login implements Command {
 
-//	private static final String PAGE_TO_GO = "/WEB-INF/view/home.jsp";
-
 	private static final String PARAM_USERNAME = "username";
 	private static final String PARAM_PASSWORD = "password";
 	
-	private static final Logger logger = Logger.getLogger(Login.class);
+	private static final String REGEX_EXCEP_USERNAME = "exception.username";
+	private static final String REGEX_EXCEP_PASSWORD = "exception.password";
+
+	private static final String EXCEP_LOGIN_PASSWORD = "exception.incorrectLoginOrPassword";
+
+	private static final String VALIDATION_EXCEPTION_PAGE = "/WEB-INF/view/exceptionPage.jsp";
+	private static final String SUCCESSFUL_PAGE = "/WEB-INF/view/home.jsp";
+
+	private static final Logger LOGGER = Logger.getLogger(Login.class);
+
 
 	private UserService userService;
+	private InputCheckingService checkingService;
+
 
 	public Login() {
 		this.userService = UserServiceImpl.getInstance();
+		this.checkingService = new InputCheckingServiceImpl();
+
 	}
-	public Login(UserService userService) {
+	public Login(UserService userService, InputCheckingService checkingService) {
 		this.userService = userService;
+		this.checkingService = checkingService;
+
 	}
 
 	@Override
@@ -40,31 +54,28 @@ public class Login implements Command {
 		String username = request.getParameter(PARAM_USERNAME);
 		String password = request.getParameter(PARAM_PASSWORD);
 
-		//TODO validation
-/*		
-		if (email == null || password == null ) {
-			request.setAttribute("message", NULL_ERROR);
-			logger.error("Errors occurred User with email " + email + ". " + "The login data contains blank values");
-			return PAGE_TO_GO;
-		}
-
-		if(!checkingService.checkLoginForm(email, password)){
-			request.setAttribute("message", REGULAR_EXP_CONFIRM_ERROR);
-			logger.error("Errors occurred User with email " + email + ". " + "The login data was not entered correctly");
-			return PAGE_TO_GO;
-		}
-*/
+		if(!checkingService.checkName(username)){
+			request.setAttribute("message", REGEX_EXCEP_USERNAME);
+			LOGGER.info(REGEX_EXCEP_USERNAME);
+			return VALIDATION_EXCEPTION_PAGE;
+		}	
+		if(!checkingService.checkName(password)){
+			request.setAttribute("message", REGEX_EXCEP_PASSWORD);
+			LOGGER.info(REGEX_EXCEP_PASSWORD);
+			return VALIDATION_EXCEPTION_PAGE;
+		}	
+		
 		Optional<User> optionalUser = userService.login(username, password);
 
 		if (!optionalUser.isPresent()) {
-			logger.error("Errors occurred User with username " + username + ". " + "User login unsuccessful");
-			return "/WEB-INF/view/home.jsp";
+			request.setAttribute("message", EXCEP_LOGIN_PASSWORD);
+			LOGGER.info(EXCEP_LOGIN_PASSWORD);
+			return VALIDATION_EXCEPTION_PAGE;
 		} else {		
 			User user = optionalUser.get();
 			HttpSession session = request.getSession();
 			session.setAttribute("user", user);
-			logger.info("User with username " + username +  "User login successful");
-			return "/WEB-INF/view/home.jsp";
+			return SUCCESSFUL_PAGE;
 		}
 	}
 }

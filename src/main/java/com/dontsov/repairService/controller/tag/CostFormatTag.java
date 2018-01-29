@@ -1,0 +1,41 @@
+package com.dontsov.repairService.controller.tag;
+
+import org.apache.log4j.Logger;
+
+import javax.servlet.jsp.JspException;
+import javax.servlet.jsp.tagext.TagSupport;
+import java.io.IOException;
+import java.text.DecimalFormat;
+
+/**
+ * The class {@code CostFormatTag} represents a custom tag
+ * that is used to format the price from coins to paper currency.
+ */
+public class CostFormatTag extends TagSupport {
+
+	private static final Logger LOGGER = Logger.getLogger(CostFormatTag.class);
+
+	private int cost;
+
+	public void setCost(int cost) {
+		this.cost = cost;
+	}
+
+	@Override
+	public int doStartTag() throws JspException {
+
+		DecimalFormat f = new DecimalFormat("#,##0.00;-#,##0.00");
+
+		f.format(cost/100.0);
+		String formattedCost = f.format(cost/100.0);
+
+		try {
+			pageContext.getOut().write(formattedCost);
+		} catch (IOException e) {
+			LOGGER.error("Exception during the formatted price: ", e);
+			throw new JspException(e);
+		}
+
+		return SKIP_BODY;
+	}
+}

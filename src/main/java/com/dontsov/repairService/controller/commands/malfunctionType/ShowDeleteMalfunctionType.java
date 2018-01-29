@@ -3,18 +3,21 @@ package com.dontsov.repairService.controller.commands.malfunctionType;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.*;
+
+import org.apache.log4j.Logger;
 
 import com.dontsov.repairService.controller.commands.Command;
-import com.dontsov.repairService.model.MalfunctionType;
 import com.dontsov.repairService.service.MalfunctionTypeService;
 import com.dontsov.repairService.service.impl.MalfunctionTypeServiceImpl;
 
 
 public class ShowDeleteMalfunctionType implements Command {
 	
+	private static final String SUCCESSFUL_PAGE = "/WEB-INF/view/malfunctionType/deleteMalfunctionType.jsp";
+
+	private static final Logger LOGGER = Logger.getLogger(ShowDeleteMalfunctionType.class);
+
 	private MalfunctionTypeService malfunctionTypeService;
 
 	public ShowDeleteMalfunctionType() {
@@ -28,10 +31,12 @@ public class ShowDeleteMalfunctionType implements Command {
 	public String execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-		HttpSession session = request.getSession();		
-		session.setAttribute("malfunctionTypeList", malfunctionTypeService.getMalfunctionTypes());
+		HttpSession session = request.getSession();	
+		LOGGER.info("User " + session.getAttribute("user").toString() + " entered ShowDeleteMalfunctionType");
+
+		request.setAttribute("malfunctionTypeList", malfunctionTypeService.getMalfunctionTypes());
 		
-		return "/WEB-INF/view/malfunctionType/deleteMalfunctionType.jsp";
+		return SUCCESSFUL_PAGE;
 	}
 
 }

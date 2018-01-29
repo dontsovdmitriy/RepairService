@@ -87,8 +87,4 @@ public class Review {
 		return true;
 	}
 	
-	
-	//TODO overload equals & hashcode
-
-	
 }

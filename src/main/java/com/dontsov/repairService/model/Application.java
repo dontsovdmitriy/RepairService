@@ -1,7 +1,6 @@
 package com.dontsov.repairService.model;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 public class Application {
 	private int id;
@@ -17,11 +16,11 @@ public class Application {
 	private LocalDate completionDate;
 
 	public enum ApplicationStatus {
-		TODO, INPROGRESS, DONE, CLOSED, CANCELED;
+		TODO, INPROGRESS, DONE, CANCELED;
 
 		@Override
 		public String toString() {
-			return name().toLowerCase();
+			return name();
 		}
 	}
 
@@ -233,8 +232,4 @@ public class Application {
 			return false;
 		return true;
 	}
-
-
-
-	//TODO overload equals & hashcode
 }

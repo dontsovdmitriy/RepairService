@@ -33,7 +33,6 @@ public class MalfunctionType {
 		}
 	}
 
-
 	public int getId() {
 		return Id;
 	}
@@ -83,9 +82,5 @@ public class MalfunctionType {
 			return false;
 		return true;
 	}
-
-	
-	//TODO overload equals & hashcode
-
 
 }

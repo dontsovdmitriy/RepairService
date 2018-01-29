@@ -2,7 +2,7 @@ package com.dontsov.repairService.model;
 
 
 public class User {
-	
+
 	private int id;
 	private String surname;
 	private String name;
@@ -12,16 +12,28 @@ public class User {
 	private String username;
 	private String password;
 	private Role role;
-	
+
 	public enum Role{
-		 USER, MANAGER, MASTER, ADMIN;
+		CLIENT ("Client"), MANAGER("Manager"), MASTER("Master"), ADMIN("Admin");
+
+		private String role;
+
+		private Role( String s )
+		{
+			role = s;
+		}
+
+		public String getRole()
+		{
+			return role;
+		}
 
 		@Override
 		public String toString() {
-			return name().toLowerCase();
+			return name().toUpperCase();
 		}
 	}
-	
+
 	public static class Builder{
 		private User user;
 
@@ -53,7 +65,7 @@ public class User {
 			user.setEmail(email);
 			return this;
 		}
-		
+
 		public Builder setPhone(String phone) {
 			user.setPhone(phone);
 			return this;
@@ -63,17 +75,17 @@ public class User {
 			user.setUsername(username);
 			return this;
 		}
-		
+
 		public Builder setPassword(String password) {
 			user.setPassword(password);
 			return this;
 		}
-		
+
 		public Builder setRole(Role role) {
 			user.setRole(role);
 			return this;
 		}
-				
+
 		public User build() {
 			return user;
 		}
@@ -209,10 +221,5 @@ public class User {
 			return false;
 		return true;
 	}
-	
-	
-
-	//TODO overload equals & hashcode
-
 
 }

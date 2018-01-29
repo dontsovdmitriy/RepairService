@@ -4,42 +4,43 @@ import java.io.IOException;
 import java.time.LocalDate;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.*;
+
+import org.apache.log4j.Logger;
 
 import com.dontsov.repairService.controller.commands.Command;
-import com.dontsov.repairService.model.Application;
-import com.dontsov.repairService.model.MalfunctionType;
-import com.dontsov.repairService.model.Review;
-import com.dontsov.repairService.model.User;
+import com.dontsov.repairService.controller.validation.*;
+import com.dontsov.repairService.model.*;
+
 import com.dontsov.repairService.model.Application.ApplicationStatus;
-import com.dontsov.repairService.service.ApplicationService;
-import com.dontsov.repairService.service.MalfunctionTypeService;
-import com.dontsov.repairService.service.ReviewService;
-import com.dontsov.repairService.service.UserService;
-import com.dontsov.repairService.service.impl.ApplicationServiceImpl;
-import com.dontsov.repairService.service.impl.MalfunctionTypeServiceImpl;
-import com.dontsov.repairService.service.impl.ReviewServiceImpl;
-import com.dontsov.repairService.service.impl.UserServiceImpl;
+import com.dontsov.repairService.service.*;
+import com.dontsov.repairService.service.impl.*;
 
 
 public class AddApplication implements Command {
 
 	private static final String MALFUNCTION_TYPE = "malfunctionType";
 	private static final String DESCRIPTION = "description";
+	private static final String REGEX_EXCEP_DESCRIPTION = "exception.description";
+	private static final String VALIDATION_EXCEPTION_PAGE = "/WEB-INF/view/exceptionPage.jsp";
+	private static final String SUCCESSFUL_PAGE = "/WEB-INF/view/home.jsp";
+
+	private static final Logger LOGGER = Logger.getLogger(AddApplication.class);
 
 	private ApplicationService applicationService;
 	private MalfunctionTypeService malfunctionTypeService;
+	private InputCheckingService checkingService;
 
 	public AddApplication() {
 		this.applicationService = ApplicationServiceImpl.getInstance();
 		this.malfunctionTypeService = MalfunctionTypeServiceImpl.getInstance();
+		this.checkingService = new InputCheckingServiceImpl();
 	}
-	public AddApplication(ApplicationService applicationService, MalfunctionTypeService malfunctionTypeService) {
+	
+	public AddApplication(ApplicationService applicationService, MalfunctionTypeService malfunctionTypeService, InputCheckingService checkingService) {
 		this.applicationService = applicationService;
 		this.malfunctionTypeService = malfunctionTypeService;
-
+		this.checkingService = checkingService;
 	}
 	
 	@Override
@@ -58,7 +59,11 @@ public class AddApplication implements Command {
 				.setRepairDay(malfunctionTypeService.getMalfunctionType(Integer.parseInt(malfunctionTypeReq)).get().getRepairDay())
 				.build();
 		
-		//TODO Data validation
+		if(!(description == "") && !checkingService.checkDescription(description)){
+			request.setAttribute("message", REGEX_EXCEP_DESCRIPTION);
+			LOGGER.info(REGEX_EXCEP_DESCRIPTION);
+			return VALIDATION_EXCEPTION_PAGE;
+		}
 		
 		Application application = new Application.Builder()
 				.setCreationDate(LocalDate.now())
@@ -70,7 +75,7 @@ public class AddApplication implements Command {
 				.build();
 		
 		applicationService.saveApplication(application);
-		return "/WEB-INF/view/home.jsp";
+		return SUCCESSFUL_PAGE;
 	}
 
 }

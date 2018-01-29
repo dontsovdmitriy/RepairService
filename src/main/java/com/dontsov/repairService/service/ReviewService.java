@@ -14,4 +14,8 @@ public interface ReviewService {
 	public Optional<Review> getReview(int id);
 
 	public void deleteReview(int theId);
+
+	public List<Review> getReviewsPag(int offset);
+
+	public int getReviewsAmmount();
 }

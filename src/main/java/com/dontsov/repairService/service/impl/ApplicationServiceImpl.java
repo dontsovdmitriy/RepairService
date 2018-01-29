@@ -3,20 +3,16 @@ package com.dontsov.repairService.service.impl;
 import java.util.List;
 import java.util.Optional;
 
-import com.dontsov.repairService.dao.ApplicationDAO;
-import com.dontsov.repairService.dao.DaoConnection;
-import com.dontsov.repairService.dao.DaoFactory;
-import com.dontsov.repairService.dao.MalfunctionTypeDAO;
-import com.dontsov.repairService.model.Application;
-import com.dontsov.repairService.model.MalfunctionType;
-import com.dontsov.repairService.model.User;
-import com.dontsov.repairService.service.ApplicationService;
-import com.dontsov.repairService.service.MalfunctionTypeService;
-import com.dontsov.repairService.service.UserService;
+import org.apache.log4j.Logger;
 
+import com.dontsov.repairService.dao.*;
+import com.dontsov.repairService.model.*;
+import com.dontsov.repairService.service.*;
 
 public class ApplicationServiceImpl implements ApplicationService {
 	
+	private static final Logger LOGGER = Logger.getLogger(ApplicationServiceImpl.class);
+
 	private DaoFactory daoFactory;
 
 	private static class Holder{
@@ -31,68 +27,154 @@ public class ApplicationServiceImpl implements ApplicationService {
 		return Holder.INSTANCE;
 	}
 
-
-	public List<Application> getApplications() {
-		try(DaoConnection connection = daoFactory.getConnection()){
-			ApplicationDAO applicationDAO = daoFactory.createApplicationDAO(connection);
-			
-			MalfunctionTypeService malfunctionTypeService = MalfunctionTypeServiceImpl.getInstance();
-			UserService userService = UserServiceImpl.getInstance();
-
-
-		//	logger.info("Searching invoice with subscription id = " + subscription.getId());
-			
-			List<Application> applications = applicationDAO.getAll();
-			
-			for (Application application : applications) {
-				
-				Optional<User> client = userService.getUser(application.getClient().getId());
-				if (client.isPresent()) {
-					application.setClient(client.get());
-				}
-				
-				Optional<User> manager = userService.getUser(application.getManager().getId());
-				if (manager.isPresent()) {
-					application.setManager(manager.get());
-				}
-				
-				Optional<User> master = userService.getUser(application.getMaster().getId());
-				if (master.isPresent()) {
-					application.setMaster(master.get());
-				}
-				
-				Optional<MalfunctionType> malfunctionType = malfunctionTypeService.getMalfunctionType(application.getMalfunctionType().getId());
-				if (malfunctionType.isPresent()) {
-					application.setMalfunctionType(malfunctionType.get());
-				}
-			}
-			return applications;
-		}
-	}
-
+	@Override
 	public void saveApplication(Application application) {
 		try(DaoConnection connection = daoFactory.getConnection()){
+			
 			ApplicationDAO applicationDAO = daoFactory.createApplicationDAO(connection);
-		//	logger.info("Searching invoice with subscription id = " + subscription.getId());
+			
+			LOGGER.info("Save application by client id = " + application.getClient().getId());
+			
 			applicationDAO.save(application);
 		}
 
 	}
 
+	@Override
 	public Optional<Application> getApplication(int id) {
 		try(DaoConnection connection = daoFactory.getConnection()){
+			
 			ApplicationDAO applicationDAO = daoFactory.createApplicationDAO(connection);
-		//	logger.info("Searching invoice with subscription id = " + subscription.getId());
+			
+			LOGGER.info("Searching application with id = " + id);
+			
 			return applicationDAO.get(id);
 		}
 	}
 
+	@Override
 	public void deleteApplication(int id) {
 		try(DaoConnection connection = daoFactory.getConnection()){
+			
 			ApplicationDAO applicationDAO = daoFactory.createApplicationDAO(connection);
-		//	logger.info("Searching invoice with subscription id = " + subscription.getId());
+			
+			LOGGER.info("Delete application with id = " + id);
+			
 			applicationDAO.delete(id);
 		}
 	}
 
+	@Override
+	public List<Application> getApplicationsByStatus(String applicationStatus) {
+		try(DaoConnection connection = daoFactory.getConnection()){
+			
+			ApplicationDAO applicationDAO = daoFactory.createApplicationDAO(connection);
+
+			LOGGER.info("Getting applications with status = " + applicationStatus);
+
+			List<Application> applications = applicationDAO.getApplicationsByStatus(applicationStatus);
+
+			return applications;
+
+		}
+	}
+
+	@Override
+	public void updateByManager(Application application) {
+		try(DaoConnection connection = daoFactory.getConnection()){
+			
+			ApplicationDAO applicationDAO = daoFactory.createApplicationDAO(connection);
+			
+			LOGGER.info("Update application with id = " + application.getId() + " by manager");
+			
+			applicationDAO.updateByManager(application);
+		}
+
+	}
+
+	@Override
+	public void updateByMaster(Application application) {
+		try(DaoConnection connection = daoFactory.getConnection()){
+			
+			ApplicationDAO applicationDAO = daoFactory.createApplicationDAO(connection);
+			
+			LOGGER.info("Update application with id = " + application.getId() + " by master");
+			
+			applicationDAO.updateByMaster(application);
+		}		
+	}
+
+	@Override
+	public List<Application> getApplicationsByStatusAndUser(String applicationStatus, int id) {
+		try(DaoConnection connection = daoFactory.getConnection()){
+			
+			ApplicationDAO applicationDAO = daoFactory.createApplicationDAO(connection);
+			
+			LOGGER.info("Getting applications by status = " + applicationStatus + " and user with id = " + id);
+			
+			List<Application> applications = applicationDAO.getApplicationsByStatusAndUser(applicationStatus, id);
+
+			return applications;
+		}
+
+	}
+
+	@Override
+	public List<Application> getUserApplications(User user, int offset) {
+		try(DaoConnection connection = daoFactory.getConnection()){
+			
+			ApplicationDAO applicationDAO = daoFactory.createApplicationDAO(connection);
+			
+			LOGGER.info("Get applications for user with id = " + user.getId());
+			
+			return applicationDAO.getUserApplications(user,offset);
+		}
+	}
+
+	@Override
+	public List<Application> getAllApplicationsPag(int offset) {
+		try(DaoConnection connection = daoFactory.getConnection()){
+			
+			ApplicationDAO applicationDAO = daoFactory.createApplicationDAO(connection);
+			
+			LOGGER.info("Get all applications with paggination");
+			
+			return applicationDAO.getAllApplicationsPag(offset);
+		}
+	}
+
+	@Override
+	public int getApplicationsAmmount() {
+		try(DaoConnection connection = daoFactory.getConnection()){
+			
+			ApplicationDAO applicationDAO = daoFactory.createApplicationDAO(connection);
+			
+			LOGGER.info("Get ammount of applications");
+			
+			return applicationDAO.getApplicationsAmmount();
+		}
+	}
+
+	@Override
+	public List<Application> getApplications() {
+		try(DaoConnection connection = daoFactory.getConnection()){
+			
+			ApplicationDAO applicationDAO = daoFactory.createApplicationDAO(connection);
+			
+			LOGGER.info("Get all applications");
+			
+			return applicationDAO.getAll();
+		}
+	}
+
+	@Override
+	public int getApplicationsAmmountByUser(User user) {
+		try(DaoConnection connection = daoFactory.getConnection()){
+			
+			ApplicationDAO applicationDAO = daoFactory.createApplicationDAO(connection);
+			
+			LOGGER.info("Get ammount of applications for user with id= " + user.getId());
+			
+			return applicationDAO.getApplicationsAmmountByUser(user);
+		}	}
 }

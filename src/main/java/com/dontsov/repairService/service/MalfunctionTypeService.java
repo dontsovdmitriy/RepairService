@@ -15,5 +15,4 @@ public interface MalfunctionTypeService {
 
 	public void deleteMalfunctionType(int theId);
 	
-	//TODO добавить UPDATE
 }

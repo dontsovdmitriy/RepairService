@@ -3,23 +3,26 @@ package com.dontsov.repairService.controller.commands.review;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.*;
+
+import org.apache.log4j.Logger;
 
 import com.dontsov.repairService.controller.commands.Command;
-import com.dontsov.repairService.model.MalfunctionType;
-import com.dontsov.repairService.service.MalfunctionTypeService;
-import com.dontsov.repairService.service.impl.MalfunctionTypeServiceImpl;
-
 
 public class ShowAddReview implements Command {
+
+	private static final String SUCCESSFUL_PAGE = "/WEB-INF/view/review/addReview.jsp";
+
+	private static final Logger LOGGER = Logger.getLogger(ShowAddReview.class);
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-		return "/WEB-INF/view/review/addReview.jsp";
+		HttpSession session = request.getSession();
+		LOGGER.info("User " + session.getAttribute("user").toString() + " entered ShowAddReview");
+
+		return SUCCESSFUL_PAGE;
 	}
 
 }

@@ -4,14 +4,14 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-
+import org.apache.log4j.Logger;
 
 /**
  * {@code DaoFactory} is the abstract class that describes the behavior of the {@code DaoFactory} object.
  */
 public abstract class DaoFactory {
 
-//	private static final Logger logger = Logger.getLogger(DaoFactory.class);
+	private static final Logger LOGGER = Logger.getLogger(DaoFactory.class);
 
 	/**
 	 * The method retrieves {@code DaoConnection} object from the connection pool.
@@ -84,7 +84,7 @@ public abstract class DaoFactory {
 
 			} catch (IOException | IllegalAccessException |
 					ClassNotFoundException | InstantiationException e) {
-	//			logger.error("Error during the DaoConnection getting: ", e);
+				LOGGER.error("Error during the DaoConnection getting: ", e);
 				throw new RuntimeException(e);
 			}
 		}

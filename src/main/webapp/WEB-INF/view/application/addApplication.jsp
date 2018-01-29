@@ -1,34 +1,36 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@include file="/WEB-INF/view/navbar.jsp"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<fmt:setLocale value="${language}" />
+<fmt:setBundle basename="i18n.repairService" />
+<!DOCTYPE html">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Add application</title>
+<title><fmt:message key="application.addApplication.title"/></title>
 </head>
 <body>
-	<h2>Add application</h2>
+	<h2><fmt:message key="application.addApplication.top"/></h2>
 	<form class="form-horizontal" method="POST" action="${pageContext.request.contextPath}/pages/addApplication">
 		<div class="form-group">
-		<label class="control-label col-sm-2" for="malfunctionType">malfunctionType:</label>
+		<label class="control-label col-sm-2" for="malfunctionType"><fmt:message key="application.addApplication.malfunctionType"/>:</label>
      		  <div class="col-sm-6">		  
      			 <select class = "form-control" id="malfunctionType" name="malfunctionType">
-     			 	 <c:forEach items="${sessionScope.malfunctionTypeList}" var="malfunctionType">
+     			 	 <c:forEach items="${requestScope.malfunctionTypeList}" var="malfunctionType">
      			 	 	<option value="${malfunctionType.id}">${malfunctionType.type}</option>
      			 	 </c:forEach>
 				</select>
 			</div>
    		</div>
    		<div class="form-group">
-     		 <label class="control-label col-sm-2" for=description>Description:</label>
+     		 <label class="control-label col-sm-2" for=description><fmt:message key="application.addApplication.description"/>:</label>
      		  <div class="col-sm-6">
-     		 	<input type="text" class="form-control" id="description" name="description">
+     		   	<textarea name="description" rows="5" cols="70" ></textarea>
      		 </div>
    		</div>
 		 <div class="form-group">        
       		<div class="col-sm-offset-2 col-sm-10">
-       			 <button type="submit" class="btn btn-default">Добавить</button>
+       			 <button type="submit" class="btn btn-default"><fmt:message key="application.addApplication.btnAdd"/></button>
      		</div>
    		</div>
 	</form>

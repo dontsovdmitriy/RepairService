@@ -3,13 +3,15 @@ package com.dontsov.repairService.service.impl;
 import java.util.List;
 import java.util.Optional;
 
-import com.dontsov.repairService.dao.DaoConnection;
-import com.dontsov.repairService.dao.DaoFactory;
-import com.dontsov.repairService.dao.MalfunctionTypeDAO;
+import org.apache.log4j.Logger;
+
+import com.dontsov.repairService.dao.*;
 import com.dontsov.repairService.model.MalfunctionType;
 import com.dontsov.repairService.service.MalfunctionTypeService;
 
 public class MalfunctionTypeServiceImpl implements MalfunctionTypeService {
+
+	private static final Logger LOGGER = Logger.getLogger(MalfunctionTypeServiceImpl.class);
 
 	private DaoFactory daoFactory;
 
@@ -24,38 +26,41 @@ public class MalfunctionTypeServiceImpl implements MalfunctionTypeService {
 	public static MalfunctionTypeService getInstance(){
 		return Holder.INSTANCE;
 	}
-
+	
+	@Override
 	public List<MalfunctionType> getMalfunctionTypes() {
 		try(DaoConnection connection = daoFactory.getConnection()){
 			MalfunctionTypeDAO malfunctionTypeDao = daoFactory.createMalfunctionTypeDAO(connection);
-		//	logger.info("Searching invoice with subscription id = " + subscription.getId());
+			LOGGER.info("Getting all malfunctions types");
 			return malfunctionTypeDao.getAll();
 		}
 	}
 
+	@Override
 	public void saveMalfunctionType(MalfunctionType malfunctionType) {
 		try(DaoConnection connection = daoFactory.getConnection()){
 			MalfunctionTypeDAO malfunctionTypeDao = daoFactory.createMalfunctionTypeDAO(connection);
-		//	logger.info("Searching invoice with subscription id = " + subscription.getId());
+			LOGGER.info("Save malfunction type with id=" + malfunctionType.getId());
 			malfunctionTypeDao.save(malfunctionType);
 		}
 	}
 
+	@Override
 	public Optional<MalfunctionType> getMalfunctionType(int id) {
 		try(DaoConnection connection = daoFactory.getConnection()){
 			MalfunctionTypeDAO malfunctionTypeDao = daoFactory.createMalfunctionTypeDAO(connection);
-		//	logger.info("Searching invoice with subscription id = " + subscription.getId());
+			LOGGER.info("Get malfunction type with id = " + id);
 			return malfunctionTypeDao.get(id);
 		}
 	}
 
+	@Override
 	public void deleteMalfunctionType(int id) {
 		try(DaoConnection connection = daoFactory.getConnection()){
 			MalfunctionTypeDAO malfunctionTypeDao = daoFactory.createMalfunctionTypeDAO(connection);
-		//	logger.info("Searching invoice with subscription id = " + subscription.getId());
+			LOGGER.info("Delete malfunction type with id = " + id);
 			malfunctionTypeDao.delete(id);
 		}
 
 	}
-
 }

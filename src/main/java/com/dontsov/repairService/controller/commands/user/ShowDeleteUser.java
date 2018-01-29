@@ -3,20 +3,20 @@ package com.dontsov.repairService.controller.commands.user;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.*;
+
+import org.apache.log4j.Logger;
 
 import com.dontsov.repairService.controller.commands.Command;
-import com.dontsov.repairService.model.MalfunctionType;
-import com.dontsov.repairService.service.MalfunctionTypeService;
 import com.dontsov.repairService.service.UserService;
-import com.dontsov.repairService.service.impl.MalfunctionTypeServiceImpl;
 import com.dontsov.repairService.service.impl.UserServiceImpl;
-
 
 public class ShowDeleteUser implements Command {
 	
+	private static final String SUCCESSFUL_PAGE = "/WEB-INF/view/user/deleteUser.jsp";
+
+	private static final Logger LOGGER = Logger.getLogger(ShowDeleteUser.class);
+
 	private UserService userService;
 
 	public ShowDeleteUser() {
@@ -31,9 +31,11 @@ public class ShowDeleteUser implements Command {
 			throws ServletException, IOException {
 		
 		HttpSession session = request.getSession();		
-		session.setAttribute("userList", userService.getUsers());
+		LOGGER.info("User " + session.getAttribute("user").toString() + " entered ShowDeleteUser");
+
+		request.setAttribute("userList", userService.getUsers());
 		
-		return "/WEB-INF/view/user/deleteUser.jsp";
+		return SUCCESSFUL_PAGE;
 	}
 
 }

@@ -10,7 +10,7 @@
 
 	<tag>
 		<name>cost-format</name>
-		<tag-class>controller.tag.CostFormatTag</tag-class>
+		<tag-class>com.dontsov.repairService.controller.tag.CostFormatTag</tag-class>
 		<body-content>empty</body-content>
 		<attribute>
 			<name>cost</name>

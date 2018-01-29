@@ -15,9 +15,9 @@ import com.dontsov.repairService.controller.commands.Command;
  */
 public class Logout implements Command {
 
-	private static final String PAGE_TO_GO = "/WEB-INF/view/home.jsp";
+	private static final String SUCCESSFUL_PAGE = "/WEB-INF/view/home.jsp";
 
-	private static final Logger logger = Logger.getLogger(Logout.class);
+	private static final Logger LOGGER = Logger.getLogger(Logout.class);
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response)
@@ -25,10 +25,10 @@ public class Logout implements Command {
 		HttpSession session = request.getSession();
 		
 		if (session.getAttribute("user") != null) {
-			logger.info("User " + session.getAttribute("user").toString() +  " logout successful");
+			LOGGER.info("User " + session.getAttribute("user").toString() +  " logout successful");
 			session.invalidate();
 		} 
 		
-		return PAGE_TO_GO;
+		return SUCCESSFUL_PAGE;
 	}
 }

@@ -3,19 +3,21 @@ package com.dontsov.repairService.controller.commands.review;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.*;
+
+import org.apache.log4j.Logger;
 
 import com.dontsov.repairService.controller.commands.Command;
-import com.dontsov.repairService.model.MalfunctionType;
-import com.dontsov.repairService.service.MalfunctionTypeService;
 import com.dontsov.repairService.service.ReviewService;
-import com.dontsov.repairService.service.impl.MalfunctionTypeServiceImpl;
 import com.dontsov.repairService.service.impl.ReviewServiceImpl;
 
-
 public class AllReviews implements Command {
+
+	private static final int ROWS_AMMOUNT = 2;
+	
+	private static final String SUCCESSFUL_PAGE = "/WEB-INF/view/review/reviewView.jsp";
+
+	private static final Logger LOGGER = Logger.getLogger(AllReviews.class);
 
 	private ReviewService reviewService;
 
@@ -29,10 +31,35 @@ public class AllReviews implements Command {
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+				
+		LOGGER.info("User entered AllReviews");
+
+		int offset = 0;
+		offset = getOffset(request, offset);
+		request.setAttribute("reviewList", reviewService.getReviewsPag(offset));		
 		
-		HttpSession session = request.getSession();		
-		session.setAttribute("reviewList", reviewService.getReviews());		
-		return "/WEB-INF/view/review/reviewView.jsp";
+		return SUCCESSFUL_PAGE;
+
+	}
+	
+	private int getOffset(HttpServletRequest request, int offset) {
+		if (request.getParameter("submit") != null) {
+			int reviewsAmount =  reviewService.getReviewsAmmount();
+						
+			offset = Integer.parseInt(request.getParameter("offset"));
+			offset += ((request.getParameter("submit").equals("Next")) || (request.getParameter("submit").equals("Следующая"))) ? ROWS_AMMOUNT : -ROWS_AMMOUNT;
+			
+			if ((offset + ROWS_AMMOUNT) >= reviewsAmount  ) {
+				offset = reviewsAmount-ROWS_AMMOUNT;
+			}
+			
+			if (offset<0) {
+				offset = 0;
+			}
+			
+			request.setAttribute("offset", offset);
+		}
+		return offset;
 	}
 
 }

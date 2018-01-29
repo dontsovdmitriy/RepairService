@@ -3,19 +3,20 @@ package com.dontsov.repairService.controller.commands.application;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.*;
+
+import org.apache.log4j.Logger;
 
 import com.dontsov.repairService.controller.commands.Command;
-import com.dontsov.repairService.model.MalfunctionType;
-import com.dontsov.repairService.service.ApplicationService;
 import com.dontsov.repairService.service.MalfunctionTypeService;
-import com.dontsov.repairService.service.impl.ApplicationServiceImpl;
 import com.dontsov.repairService.service.impl.MalfunctionTypeServiceImpl;
 
 
 public class ShowAddApplication implements Command {
+	
+	private static final String SUCCESSFUL_PAGE = "/WEB-INF/view/application/addApplication.jsp";
+	
+	private static final Logger LOGGER = Logger.getLogger(ShowAddApplication.class);
 
 	private MalfunctionTypeService malfunctionTypeService;
 
@@ -30,10 +31,12 @@ public class ShowAddApplication implements Command {
 	public String execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 	
-		HttpSession session = request.getSession();		
-		session.setAttribute("malfunctionTypeList", malfunctionTypeService.getMalfunctionTypes());
+		HttpSession session = request.getSession();	
+		LOGGER.info("User " + session.getAttribute("user").toString() + " entered showAddApplication");
+
+		request.setAttribute("malfunctionTypeList", malfunctionTypeService.getMalfunctionTypes());
 		
-		return "/WEB-INF/view/application/addApplication.jsp";
+		return SUCCESSFUL_PAGE;
 	}
 
 }

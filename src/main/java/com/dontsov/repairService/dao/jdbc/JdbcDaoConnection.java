@@ -2,11 +2,14 @@ package com.dontsov.repairService.dao.jdbc;
 
 import java.sql.*;
 
+import org.apache.log4j.Logger;
+
 import com.dontsov.repairService.dao.DaoConnection;
 
 public class JdbcDaoConnection implements DaoConnection {
 
- //   private static final Logger logger = Logger.getLogger(JdbcDaoConnection.class);
+	private static final Logger LOGGER = Logger.getLogger(JdbcDaoConnection.class);
+	
 	private Connection connection;
 	private boolean inTransaction = false;
 	
@@ -23,7 +26,7 @@ public class JdbcDaoConnection implements DaoConnection {
 		try {
 			connection.close();
 		} catch (SQLException e) {
-  //          logger.error("Error during connection closing: ", e);
+            LOGGER.error("Error during connection closing: ", e);
 			throw new RuntimeException(e);
 		}
 	}
@@ -34,7 +37,7 @@ public class JdbcDaoConnection implements DaoConnection {
 			connection.setAutoCommit(false);
 			inTransaction = true;
 		} catch (SQLException e) {
-      //      logger.error("Error during transaction beginning: ", e);
+            LOGGER.error("Error during transaction beginning: ", e);
 			throw new RuntimeException(e);
 		}
 	}
@@ -45,7 +48,7 @@ public class JdbcDaoConnection implements DaoConnection {
 			connection.commit();
 			inTransaction = false;
 		} catch (SQLException e) {
-      //      logger.error("Error during transaction commit: ", e);
+            LOGGER.error("Error during transaction commit: ", e);
 			throw new RuntimeException(e);
 		}
 	}
@@ -56,7 +59,7 @@ public class JdbcDaoConnection implements DaoConnection {
 			connection.rollback();
 			inTransaction = false;
 		} catch (SQLException e) {
-      //      logger.error("Error during transaction rollback: ", e);
+            LOGGER.error("Error during transaction rollback: ", e);
 			throw new RuntimeException(e);
 		}
 	}
