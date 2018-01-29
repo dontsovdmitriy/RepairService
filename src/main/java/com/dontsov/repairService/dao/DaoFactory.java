@@ -21,35 +21,34 @@ public abstract class DaoFactory {
 	public abstract DaoConnection getConnection();
 
 	/**
-	 * The method creates {@code UserDao} object.
+	 * The method creates {@code ApplicationDAO} object.
 	 *
 	 * @param connection {@code DaoConnection} object.
-	 * @return created {@code UserDao} object.
+	 * @return created {@code ApplicationDAO} object.
 	 */
 	public abstract ApplicationDAO createApplicationDAO(DaoConnection connection);
 
-	//TODO пересмотреть описание здесь
 	/**
-	 * The method creates {@code PublisherDao} object.
+	 * The method creates {@code MalfunctionTypeDAO} object.
 	 *
 	 * @param connection {@code DaoConnection} object.
-	 * @return created {@code PublisherDao} object.
+	 * @return created {@code MalfunctionTypeDAO} object.
 	 */
 	public abstract MalfunctionTypeDAO createMalfunctionTypeDAO(DaoConnection connection);
 
 	/**
-	 * The method creates {@code PeriodicalCategoryDao} object.
+	 * The method creates {@code ReviewDAO} object.
 	 *
 	 * @param connection {@code DaoConnection} object.
-	 * @return created {@code PeriodicalCategoryDao} object.
+	 * @return created {@code ReviewDAO} object.
 	 */
 	public abstract ReviewDAO createReviewDAO(DaoConnection connection);
 
 	/**
-	 * The method creates {@code PeriodicalDao} object.
+	 * The method creates {@code UserDAO} object.
 	 *
 	 * @param connection {@code DaoConnection} object.
-	 * @return created {@code PeriodicalDao} object.
+	 * @return created {@code UserDAO} object.
 	 */
 	public abstract UserDAO createUserDAO(DaoConnection connection);
 

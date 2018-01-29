@@ -12,6 +12,10 @@ import com.dontsov.repairService.model.User;
 import com.dontsov.repairService.service.UserService;
 import com.dontsov.repairService.service.impl.UserServiceImpl;
 
+/**
+ * The class describes the {@code Command} interface implementation.
+ * It contains a method for showing page for updating application by manager
+ */
 public class ShowUpdateManagerApplication implements Command {
 
 	private static final String APPLICATION_ID = "application";

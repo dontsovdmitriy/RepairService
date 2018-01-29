@@ -14,8 +14,8 @@
 	<form class="form-horizontal" method="POST" action="${pageContext.request.contextPath}/pages/updateMasterApplication">
    		<input type="hidden" name="applicationId" value="${applicationId}">                                      	
    		<div class="container">
-   			 	<label class="radio-inline"><input type="radio" name="status" value="<fmt:message key="application.updateMasterApplication.todo" />"></label>
-				<label class="radio-inline"><input type="radio" name="status" value="<fmt:message key="application.updateMasterApplication.done" />"></label>
+   			 	<label class="radio-inline"><input type="radio" name="status" value="TODO"><fmt:message key="application.updateMasterApplication.todo" /></label>
+				<label class="radio-inline"><input type="radio" name="status" value="DONE"><fmt:message key="application.updateMasterApplication.done" /></label>
 		</div>
    		
 		 <div class="form-group">        

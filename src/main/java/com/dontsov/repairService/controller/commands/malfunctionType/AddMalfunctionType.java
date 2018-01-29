@@ -13,7 +13,10 @@ import com.dontsov.repairService.model.MalfunctionType;
 import com.dontsov.repairService.service.MalfunctionTypeService;
 import com.dontsov.repairService.service.impl.MalfunctionTypeServiceImpl;
 
-
+/**
+ * The class describes the {@code Command} interface implementation.
+ * It contains a method for adding malfunction type
+ */
 public class AddMalfunctionType implements Command {
 
 	private static final String TYPE = "type";
@@ -46,7 +49,7 @@ public class AddMalfunctionType implements Command {
 		String type = request.getParameter(TYPE);
 		String repairDay = request.getParameter(REPAIR_DAY);
 
-		if(!checkingService.checkName(type)){
+		if(!checkingService.checkType(type)){
 			request.setAttribute("message", REGEX_EXCEP_TYPE);
 			LOGGER.info(REGEX_EXCEP_TYPE);
 			return VALIDATION_EXCEPTION_PAGE;

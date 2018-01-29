@@ -11,6 +11,10 @@ import com.dontsov.repairService.controller.commands.Command;
 import com.dontsov.repairService.service.UserService;
 import com.dontsov.repairService.service.impl.UserServiceImpl;
 
+/**
+ * The class describes the {@code Command} interface implementation.
+ * It contains a method for showing all users
+ */
 public class AllUsers implements Command {
 
 	private static final int ROWS_AMMOUNT = 2;
@@ -39,6 +43,7 @@ public class AllUsers implements Command {
 		offset = getOffset(request, offset);
 
 		request.setAttribute("userList", userService.getUsersPag(offset));
+		request.setAttribute("offset", offset);
 
 		return SUCCESSFUL_PAGE;
 	}
@@ -48,17 +53,19 @@ public class AllUsers implements Command {
 			int applicationsAmount =  userService.getUsersAmmount();
 
 			offset = Integer.parseInt(request.getParameter("offset"));
-			offset += ((request.getParameter("submit").equals("Next")) || (request.getParameter("submit").equals("Следующая"))) ? ROWS_AMMOUNT : -ROWS_AMMOUNT;
-
-			if ((offset + ROWS_AMMOUNT) >= applicationsAmount  ) {
-				offset = applicationsAmount-ROWS_AMMOUNT;
+			
+			if (((offset + ROWS_AMMOUNT) < applicationsAmount) && ((request.getParameter("submit").equals("Next")) || (request.getParameter("submit").equals("Следующая")))  ) {
+				offset += ROWS_AMMOUNT;
 			}
-
+			
+			if (request.getParameter("submit").equals("Previous") || (request.getParameter("submit").equals("Предыдущая"))  ) {
+				offset -= ROWS_AMMOUNT;
+			}
+			
 			if (offset<0) {
 				offset = 0;
 			}
 			
-			request.setAttribute("offset", offset);
 		}
 		return offset;
 

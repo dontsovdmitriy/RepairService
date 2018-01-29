@@ -14,6 +14,10 @@ import com.dontsov.repairService.model.User;
 import com.dontsov.repairService.service.UserService;
 import com.dontsov.repairService.service.impl.UserServiceImpl;
 
+/**
+ * The class describes the {@code Command} interface implementation.
+ * It contains a method for adding user
+ */
 public class AddUser implements Command {
 
 	private static final String SURNAME = "surname";
@@ -29,7 +33,7 @@ public class AddUser implements Command {
 	private static final String REGEX_EXCEP_NAME = "exception.name";
 	private static final String REGEX_EXCEP_SECOND_NAME = "exception.secondName";
 	private static final String REGEX_EXCEP_EMAIL = "exception.email";
-	private static final String REGEX_EXCEP_PHONE = "exception.email";
+	private static final String REGEX_EXCEP_PHONE = "exception.phone";
 	private static final String REGEX_EXCEP_USERNAME = "exception.username";
 	private static final String REGEX_EXCEP_PASSWORD = "exception.password";
 	private static final String REGEX_EXCEP_CONFIRM_PASSWORD = "confirmPassword";

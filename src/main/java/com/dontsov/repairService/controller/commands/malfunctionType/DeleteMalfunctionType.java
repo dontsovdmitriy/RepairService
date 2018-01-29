@@ -11,7 +11,10 @@ import com.dontsov.repairService.controller.commands.Command;
 import com.dontsov.repairService.service.MalfunctionTypeService;
 import com.dontsov.repairService.service.impl.MalfunctionTypeServiceImpl;
 
-
+/**
+ * The class describes the {@code Command} interface implementation.
+ * It contains a method for delete malfunction type
+ */
 public class DeleteMalfunctionType implements Command {
 
 	private static final String MALFUNCTION_TYPE_ID = "malfunctionType";
@@ -32,10 +35,8 @@ public class DeleteMalfunctionType implements Command {
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
-		HttpSession session = request.getSession();
 		
-	//	LOGGER.info("User " + session.getAttribute("user").toString() + " entered DeleteMalfunctionType");
+		LOGGER.info("User entered DeleteMalfunctionType");
 
 		String id = request.getParameter(MALFUNCTION_TYPE_ID);
 

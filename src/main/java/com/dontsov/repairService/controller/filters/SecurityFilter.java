@@ -17,6 +17,10 @@ import org.apache.log4j.Logger;
 
 import com.dontsov.repairService.model.User;
 
+/**
+ * {@code SecurityFilter} is the class that describes security filter.
+ * It forbids the access to resources for the users that don't have necessary rights.
+ */
 public class SecurityFilter implements Filter {
 	private static final Logger LOGGER = Logger.getLogger(SecurityFilter.class);
 
@@ -52,18 +56,15 @@ public class SecurityFilter implements Filter {
 		generalURI.add("/repairService/pages/showLogin");
 		generalURI.add("/repairService/pages/login");
 		generalURI.add("/repairService/pages/allReviews");
+		generalURI.add("/repairService/pages/allMalfunctionTypes");
 
-		//TODO что делать со стартовой страницой посмотреть?
-		
 		clientURI.addAll(generalURI);
-		clientURI.add("/repairService/pages/allMalfunctionTypes");
 		clientURI.add("/repairService/pages/logout");
 		clientURI.add("/repairService/pages/addReview");
 		clientURI.add("/repairService/pages/showAddReview");
 		clientURI.add("/repairService/pages/addApplication");
 		clientURI.add("/repairService/pages/showAddApplication");
 		clientURI.add("/repairService/pages/myApplications");
-		clientURI.add("/repairService/pages/allMalfunctionTypes");
 		clientURI.add("/repairService/pages/showHome");
 		
 		masterURI.addAll(clientURI);
@@ -74,11 +75,7 @@ public class SecurityFilter implements Filter {
 		managerURI.addAll(masterURI);
 		managerURI.add("/repairService/pages/addMalfunctionType");
 		managerURI.add("/repairService/pages/showAddMalfunctionType");
-		managerURI.add("/repairService/pages/showDeleteMalfunctionType");
-		managerURI.add("/repairService/pages/deleteMalfunctionType");
 		managerURI.add("/repairService/pages/allUsers");
-		managerURI.add("/repairService/pages/showDeleteReview");
-		managerURI.add("/repairService/pages/deleteReview");
 		managerURI.add("/repairService/pages/allApplications");
 		managerURI.add("/repairService/pages/showDeleteApplication");
 		managerURI.add("/repairService/pages/deleteApplication");
@@ -88,6 +85,10 @@ public class SecurityFilter implements Filter {
 		managerURI.add("/repairService/pages/addMalfunctionType");
 
 		adminURI.addAll(managerURI);
+		adminURI.add("/repairService/pages/showDeleteReview");
+		adminURI.add("/repairService/pages/deleteReview");
+		adminURI.add("/repairService/pages/showDeleteMalfunctionType");
+		adminURI.add("/repairService/pages/deleteMalfunctionType");
 		adminURI.add("/repairService/pages/showDeleteUser");
 		adminURI.add("/repairService/pages/deleteUser");
 		adminURI.add("/repairService/pages/showChangeRole");
@@ -127,7 +128,6 @@ public class SecurityFilter implements Filter {
 			chain.doFilter(requestS, responseS);
 		} else {
 			request.setAttribute("message", errorString);
-			//TODO сработает ли посмотреть куда отправляет 
 			request.getRequestDispatcher("/WEB-INF/view/exceptionPage.jsp").forward(request,response);
 		}
 	}

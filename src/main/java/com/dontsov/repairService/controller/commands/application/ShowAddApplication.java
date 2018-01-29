@@ -11,7 +11,10 @@ import com.dontsov.repairService.controller.commands.Command;
 import com.dontsov.repairService.service.MalfunctionTypeService;
 import com.dontsov.repairService.service.impl.MalfunctionTypeServiceImpl;
 
-
+/**
+ * The class describes the {@code Command} interface implementation.
+ * It contains a method for showing page for add application
+ */
 public class ShowAddApplication implements Command {
 	
 	private static final String SUCCESSFUL_PAGE = "/WEB-INF/view/application/addApplication.jsp";

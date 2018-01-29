@@ -14,6 +14,10 @@ import com.dontsov.repairService.model.Application.ApplicationStatus;
 import com.dontsov.repairService.service.ApplicationService;
 import com.dontsov.repairService.service.impl.ApplicationServiceImpl;
 
+/**
+ * The class describes the {@code Command} interface implementation.
+ * It contains a method for for updating applications by manager
+ */
 public class UpdateManagerApplication implements Command {
 
 	private static final String MASTER_ID = "master";
@@ -54,12 +58,6 @@ public class UpdateManagerApplication implements Command {
 		String priceStr = request.getParameter(PRICE);
 		String serviceComment = request.getParameter(SERVICE_COMMENT);
 		String status = request.getParameter(STATUS);
-		
-		if (status.equals("application.updateManagerApplication.inprogress")) {
-			status = "INPROGRESS";
-		} else {
-			status = "CANCELED";
-		}
 		
 		if(!checkingService.checkPrice(priceStr)){
 			request.setAttribute("message", REGEX_EXCEP_PRICE);

@@ -13,6 +13,10 @@ import com.dontsov.repairService.model.Application.ApplicationStatus;
 import com.dontsov.repairService.service.ApplicationService;
 import com.dontsov.repairService.service.impl.ApplicationServiceImpl;
 
+/**
+ * The class describes the {@code Command} interface implementation.
+ * It contains a method for for updating applications by master
+ */
 public class UpdateMasterApplication implements Command {
 
 	private static final String STATUS = "status";
@@ -40,12 +44,6 @@ public class UpdateMasterApplication implements Command {
 		String applicationId = request.getParameter("applicationId");
 
 		String status = request.getParameter(STATUS);
-		
-		if (status.equals("application.updateMasterApplication.todo")) {
-			status = "TODO";
-		} else {
-			status = "DONE";
-		}
 
 		Application application = new Application.Builder()
 				.setStatus(ApplicationStatus.valueOf(status))

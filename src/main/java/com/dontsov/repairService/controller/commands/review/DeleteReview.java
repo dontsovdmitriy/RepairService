@@ -11,7 +11,10 @@ import com.dontsov.repairService.controller.commands.Command;
 import com.dontsov.repairService.service.ReviewService;
 import com.dontsov.repairService.service.impl.ReviewServiceImpl;
 
-
+/**
+ * The class describes the {@code Command} interface implementation.
+ * It contains a method for delete review
+ */
 public class DeleteReview implements Command {
 
 	private static final String REVIEW_ID = "review";

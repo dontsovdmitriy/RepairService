@@ -10,7 +10,9 @@ public interface InputCheckingService {
 	 * @param user for checking
 	 * @return true if checking is successful
 	 */
-	boolean  checkName(String name);
+	boolean checkName(String name);
+	
+	boolean checkType(String type);
 
 	boolean checkEmail(String email);
 

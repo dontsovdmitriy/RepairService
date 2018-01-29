@@ -11,6 +11,10 @@ import com.dontsov.repairService.controller.commands.Command;
 import com.dontsov.repairService.service.UserService;
 import com.dontsov.repairService.service.impl.UserServiceImpl;
 
+/**
+ * The class describes the {@code Command} interface implementation.
+ * It contains a method for showing page for delete user
+ */
 public class ShowDeleteUser implements Command {
 	
 	private static final String SUCCESSFUL_PAGE = "/WEB-INF/view/user/deleteUser.jsp";

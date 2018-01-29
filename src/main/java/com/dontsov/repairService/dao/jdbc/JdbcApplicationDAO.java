@@ -19,7 +19,7 @@ public class JdbcApplicationDAO implements ApplicationDAO {
 	private static final String SELECT_ALL_APPLICATION = "SELECT "
 			+ "ap.id AS ap_id, "
 			+ "ap.creation_date AS ap_creation_date, "
-			+ "ap.description AS ap_description,"
+			+ "ap.description AS ap_description, "
 			+ "ap.price AS ap_price, "
 			+ "ap.status AS ap_status, "
 			+ "ap.completion_date AS ap_completion_date, "
@@ -202,7 +202,6 @@ public class JdbcApplicationDAO implements ApplicationDAO {
 		} catch (SQLException e) {
 			String message = String.format("Exception during add an application with client id = %s", application.getClient().getId());
 			LOGGER.error( message , e);
-			//TODO вот сдеть переделать на БД exception
 			throw new RuntimeException(message, e);
 		}
 	}

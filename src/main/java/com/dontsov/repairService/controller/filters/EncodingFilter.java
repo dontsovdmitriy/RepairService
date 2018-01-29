@@ -11,6 +11,9 @@ import javax.servlet.ServletResponse;
 
 import org.apache.log4j.Logger;
 
+/**
+ * Allows entering on the frontend and saving cyrillic symbols in the system.
+ */
 public class EncodingFilter implements Filter {
 
 	private static final Logger LOGGER = Logger.getLogger(EncodingFilter.class);

@@ -16,7 +16,10 @@ import com.dontsov.repairService.model.Application.ApplicationStatus;
 import com.dontsov.repairService.service.*;
 import com.dontsov.repairService.service.impl.*;
 
-
+/**
+ * The class describes the {@code Command} interface implementation.
+ * It contains a method for add application
+ */
 public class AddApplication implements Command {
 
 	private static final String MALFUNCTION_TYPE = "malfunctionType";

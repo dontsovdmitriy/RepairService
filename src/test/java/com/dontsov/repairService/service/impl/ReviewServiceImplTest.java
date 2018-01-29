@@ -44,7 +44,7 @@ public class ReviewServiceImplTest {
 		when(reviewDAO.getAll()).thenReturn(reviews);      
 		List<Review> reviewsResult = reviewServiceImpl.getReviews();
 		verify(daoFactory).getConnection();
-		verify(daoFactory).createReviewDAO(connection);
+		verify(daoFactory).createMalfunctionTypeDAO(connection);
 		verify(reviewDAO).getAll();
 		assertEquals(reviews, reviewsResult);	
 	}
@@ -61,5 +61,17 @@ public class ReviewServiceImplTest {
 		verify(daoFactory).createReviewDAO(connection);
 		verify(reviewDAO).get(1);
 		assertEquals(reviewOptional, reviewResult);	
+	}
+	
+	@Test
+	public void getReviewsAmmount_test() {
+		when(daoFactory.getConnection()).thenReturn(connection);
+		when(daoFactory.createReviewDAO(connection)).thenReturn(reviewDAO);
+		when(reviewDAO.getReviewsAmmount()).thenReturn(5);      
+		int ammountReviews = reviewServiceImpl.getReviewsAmmount();
+		verify(daoFactory).getConnection();
+		verify(daoFactory).createReviewDAO(connection);
+		verify(reviewDAO).getReviewsAmmount();
+		assertEquals(5, ammountReviews);	
 	}
 }

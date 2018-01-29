@@ -15,7 +15,10 @@ import com.dontsov.repairService.model.User.Role;
 import com.dontsov.repairService.service.UserService;
 import com.dontsov.repairService.service.impl.UserServiceImpl;
 
-
+/**
+ * The class describes the {@code Command} interface implementation.
+ * It contains a method for changing user role
+ */
 public class ChangeRole implements Command {
 
 	private static final String USER_ID = "user";

@@ -11,6 +11,10 @@ import com.dontsov.repairService.controller.commands.Command;
 import com.dontsov.repairService.service.ApplicationService;
 import com.dontsov.repairService.service.impl.ApplicationServiceImpl;
 
+/**
+ * The class describes the {@code Command} interface implementation.
+ * It contains a method for showing page for processing application by manager
+ */
 public class ShowSelectManagerApplication implements Command {
 	
 	private static final String APPLICATION_STATUS = "TODO";

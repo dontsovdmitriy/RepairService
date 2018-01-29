@@ -21,6 +21,9 @@ public class UtilDAO {
 	private UtilDAO() {
 	}
 	
+	/**
+	 * Creates a new malfunction type using the data from the result set.
+	 */
 	public static MalfunctionType createMalfunctionType(ResultSet resultSet)  {
 		try {
 			return new MalfunctionType.Builder()
@@ -35,6 +38,9 @@ public class UtilDAO {
 		}
 	}
 	
+	/**
+	 * Creates a new create user using the data from the result set.
+	 */
 	public static User createUser(ResultSet resultSet)  {
 		try {
 			return new User.Builder()
@@ -56,12 +62,15 @@ public class UtilDAO {
 		}
 	}
 	
+	/**
+	 * Creates a new create review using the data from the result set.
+	 */
 	public static Review createReview(ResultSet resultSet)  {
 		try {
 						
 			User client = new User.Builder()
 					.setId(resultSet.getInt("cl_id"))
-					.setSurname(resultSet.getString("cl_username"))
+					.setUsername(resultSet.getString("cl_username"))
 					.build();
 			
 			return new Review.Builder()
@@ -77,6 +86,9 @@ public class UtilDAO {
 		}
 	}
 	
+	/**
+	 * Creates a new create application using the data from the result set.
+	 */
 	public static Application createApplication(ResultSet resultSet)  {
 		try {
 						
@@ -127,6 +139,9 @@ public class UtilDAO {
 		}
 	}
 	
+	/**
+	 * Get the password hash using the SHA-256 encoding
+	 */
 	public static String getPasswordHash(String password) {
 		String result = null;
 		try {
@@ -140,6 +155,9 @@ public class UtilDAO {
 		return result;
 	}
 
+	/**
+	 * Check the user entered password using a hash password from the database
+	 */
 	public static boolean checkPassword(String passwordInput, String storedHash) {
 		boolean passwordCorrect = false;
 		if (getPasswordHash(passwordInput).equals(storedHash)) {

@@ -12,6 +12,10 @@ import com.dontsov.repairService.controller.commands.application.AllApplications
 import com.dontsov.repairService.service.ReviewService;
 import com.dontsov.repairService.service.impl.ReviewServiceImpl;
 
+/**
+ * The class describes the {@code Command} interface implementation.
+ * It contains a method for showing page for deleting review
+ */
 public class ShowDeleteReview implements Command {
 	
 	private static final String SUCCESSFUL_PAGE = "/WEB-INF/view/review/deleteReview.jsp";

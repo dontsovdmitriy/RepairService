@@ -13,7 +13,10 @@ import com.dontsov.repairService.model.*;
 import com.dontsov.repairService.service.ReviewService;
 import com.dontsov.repairService.service.impl.ReviewServiceImpl;
 
-
+/**
+ * The class describes the {@code Command} interface implementation.
+ * It contains a method add review
+ */
 public class AddReview implements Command {
 
 	private static final String DESCRIPTION = "description";
@@ -45,7 +48,7 @@ public class AddReview implements Command {
 		String description = request.getParameter(DESCRIPTION);
 		User user = (User) session.getAttribute("user");
 		
-		if(!(description == "") && !checkingService.checkDescription(description)){
+		if(!checkingService.checkDescription(description)){
 			request.setAttribute("message", REGEX_EXCEP_DESCRIPTION);
 			LOGGER.info(REGEX_EXCEP_DESCRIPTION);
 			return VALIDATION_EXCEPTION_PAGE;

@@ -10,7 +10,7 @@ import com.dontsov.repairService.model.Review;
 
 public class JdbcReviewDAO implements ReviewDAO {
 
-	private static final int PAG_LIMIT = 2;
+	private static final int PAG_LIMIT = 3;
 
 	private static final String INSERT_REVIEW = "INSERT INTO review " + "(description, client_id) " + "VALUES (?, ?)";
 	private static final String DELETE_REVIEW = "DELETE FROM review WHERE id = ?";

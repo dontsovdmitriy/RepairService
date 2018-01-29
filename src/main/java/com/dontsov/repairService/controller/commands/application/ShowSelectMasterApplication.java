@@ -12,7 +12,10 @@ import com.dontsov.repairService.model.User;
 import com.dontsov.repairService.service.ApplicationService;
 import com.dontsov.repairService.service.impl.ApplicationServiceImpl;
 
-
+/**
+ * The class describes the {@code Command} interface implementation.
+ * It contains a method for showing page for processing application by master
+ */
 public class ShowSelectMasterApplication implements Command {
 	
 	private static final String APPLICATION_STATUS = "INPROGRESS";

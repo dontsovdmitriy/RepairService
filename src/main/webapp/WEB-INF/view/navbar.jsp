@@ -32,16 +32,22 @@
       <ul class="nav navbar-nav">
         <c:if test="${not empty sessionScope.user}">   
         <li class="active"><a href="${pageContext.request.contextPath}/pages/showHome"><fmt:message key="navbar.title.home" /></a></li>
+        </c:if>
         <li class="dropdown">
           <a class="dropdown-toggle" data-toggle="dropdown" href="#"><fmt:message key="navbar.malfunctionType.top" /><span class="caret"></span></a>
           <ul class="dropdown-menu">
-       		<li><a href="${pageContext.request.contextPath}/pages/allMalfunctionTypes"><fmt:message key="navbar.malfunctionType.allMalfTypes" /></a></li>	
+       		<li><a href="${pageContext.request.contextPath}/pages/allMalfunctionTypes"><fmt:message key="navbar.malfunctionType.allMalfTypes" /></a></li>	    		 
+    		 <c:if test="${not empty sessionScope.user}">            		
     		<c:if test="${(sessionScope.user.role == 'MANAGER') || (sessionScope.user.role == 'ADMIN')}"> 	
     			<li><a href="${pageContext.request.contextPath}/pages/showAddMalfunctionType"><fmt:message key="navbar.malfunctionType.addMalfType" /></a></li>
+    		</c:if>
+    		<c:if test="${sessionScope.user.role == 'ADMIN'}"> 					
     			<li><a href="${pageContext.request.contextPath}/pages/showDeleteMalfunctionType"><fmt:message key="navbar.malfunctionType.deleteMalfType" /></a></li>
+    		</c:if>
     		</c:if>
           </ul>
         </li> 
+        <c:if test="${not empty sessionScope.user}">         
         <li class="dropdown">
           <a class="dropdown-toggle" data-toggle="dropdown" href="#"><fmt:message key="navbar.user.top" /><span class="caret"></span></a>
           <ul class="dropdown-menu">
@@ -60,7 +66,7 @@
           <ul class="dropdown-menu">
           <c:if test="${not empty sessionScope.user}">             
        		<li><a href="${pageContext.request.contextPath}/pages/showAddReview"><fmt:message key="navbar.review.addReview" /></a></li>
-       		   <c:if test="${(sessionScope.user.role == 'MANAGER') || (sessionScope.user.role == 'ADMIN')}">    		
+       		   <c:if test="${sessionScope.user.role == 'ADMIN'}">    		
     				<li><a href="${pageContext.request.contextPath}/pages/showDeleteReview"><fmt:message key="navbar.review.deleteReview" /></a></li>
     			</c:if>
     	  </c:if>

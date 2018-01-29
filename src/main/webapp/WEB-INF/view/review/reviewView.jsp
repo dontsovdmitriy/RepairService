@@ -42,7 +42,7 @@
         </c:choose>            
                 <form class="pagination" action="${pageContext.request.contextPath}/pages/allReviews" method="POST">
                     <input type="hidden" name="offset" value="${offset}">                                       
-                   		 <input type="submit" name="submit" value="<fmt:message key="review.reviewView.btnPrevious" />">
+                   	<input type="submit" name="submit" value="<fmt:message key="review.reviewView.btnPrevious" />">
                     <input type="submit" name="submit" value="<fmt:message key="review.reviewView.btnNext" />">
                 </form>
 	</div>

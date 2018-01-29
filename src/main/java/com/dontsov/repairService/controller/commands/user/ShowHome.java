@@ -11,6 +11,10 @@ import org.apache.log4j.Logger;
 
 import com.dontsov.repairService.controller.commands.Command;
 
+/**
+ * The class describes the {@code Command} interface implementation.
+ * It contains a method for showing home page
+ */
 public class ShowHome implements Command {
 
 	private static final String SUCCESSFUL_PAGE = "/WEB-INF/view/home.jsp";
