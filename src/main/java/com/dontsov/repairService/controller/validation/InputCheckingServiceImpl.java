@@ -8,7 +8,7 @@ public class InputCheckingServiceImpl implements InputCheckingService{
 	public static final String TYPE_REGEX = "^[^<>#$&*{}\\[\\]\\\\/+*]{1,45}$";
 	public static final String DESCRIPTION_REGEX = "^[^<>]{1,1000}$";
 	public static final String NUMBER_DAY = "\\d{1,3}";
-	public static final String MONEY_REGEX = "[0-9]+([,.]{1}[0-9]{1,2})?";
+	public static final String MONEY_REGEX = "[0-9]+([,.]{1})+([0-9]{2})";
 //	public static final String MONEY_REGEX = "[0-9]+([,.][0-9]{1,2})?";
 
 	public static final String PHONE_NUMBER_REGEX = "^[\\d]{10}$";
