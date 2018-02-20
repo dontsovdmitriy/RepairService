@@ -74,6 +74,7 @@ public class FrontController extends HttpServlet {
 		commands.put("POST:/deleteMalfunctionType", new DeleteMalfunctionType());
 
 		//User
+		//comment for Jenkins
 		commands.put("GET:/showAddUser", new ShowAddUser());
 		commands.put("POST:/addUser", new AddUser());
 		commands.put("GET:/showDeleteUser", new ShowDeleteUser());
