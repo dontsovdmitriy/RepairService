@@ -37,19 +37,6 @@ public class ReviewServiceImplTest {
 	private ReviewServiceImpl reviewServiceImpl;
 
 	@Test
-	public void getReviews_test() {
-		List<Review> reviews = new ArrayList<>();
-		when(daoFactory.getConnection()).thenReturn(connection);
-		when(daoFactory.createReviewDAO(connection)).thenReturn(reviewDAO);
-		when(reviewDAO.getAll()).thenReturn(reviews);      
-		List<Review> reviewsResult = reviewServiceImpl.getReviews();
-		verify(daoFactory).getConnection();
-		verify(daoFactory).createMalfunctionTypeDAO(connection);
-		verify(reviewDAO).getAll();
-		assertEquals(reviews, reviewsResult);	
-	}
-	
-	@Test
 	public void getReview_test() {
 		Review review = new Review();
 		Optional<Review> reviewOptional = Optional.of(review);

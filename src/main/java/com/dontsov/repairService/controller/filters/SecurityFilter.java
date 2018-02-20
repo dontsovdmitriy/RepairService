@@ -51,48 +51,48 @@ public class SecurityFilter implements Filter {
 
 	public void init(FilterConfig fConfig) throws ServletException {
 
-		generalURI.add("/repairService/pages/showAddUser");
-		generalURI.add("/repairService/pages/addUser");
-		generalURI.add("/repairService/pages/showLogin");
-		generalURI.add("/repairService/pages/login");
-		generalURI.add("/repairService/pages/allReviews");
-		generalURI.add("/repairService/pages/allMalfunctionTypes");
+		generalURI.add("/RepairService/pages/showAddUser");
+		generalURI.add("/RepairService/pages/addUser");
+		generalURI.add("/RepairService/pages/showLogin");
+		generalURI.add("/RepairService/pages/login");
+		generalURI.add("/RepairService/pages/allReviews");
+		generalURI.add("/RepairService/pages/allMalfunctionTypes");
 
 		clientURI.addAll(generalURI);
-		clientURI.add("/repairService/pages/logout");
-		clientURI.add("/repairService/pages/addReview");
-		clientURI.add("/repairService/pages/showAddReview");
-		clientURI.add("/repairService/pages/addApplication");
-		clientURI.add("/repairService/pages/showAddApplication");
-		clientURI.add("/repairService/pages/myApplications");
-		clientURI.add("/repairService/pages/showHome");
+		clientURI.add("/RepairService/pages/logout");
+		clientURI.add("/RepairService/pages/addReview");
+		clientURI.add("/RepairService/pages/showAddReview");
+		clientURI.add("/RepairService/pages/addApplication");
+		clientURI.add("/RepairService/pages/showAddApplication");
+		clientURI.add("/RepairService/pages/myApplications");
+		clientURI.add("/RepairService/pages/showHome");
 		
 		masterURI.addAll(clientURI);
-		masterURI.add("/repairService/pages/showSelectMasterApplication");
-		masterURI.add("/repairService/pages/showUpdateMasterApplication");
-		masterURI.add("/repairService/pages/updateMasterApplication");
+		masterURI.add("/RepairService/pages/showSelectMasterApplication");
+		masterURI.add("/RepairService/pages/showUpdateMasterApplication");
+		masterURI.add("/RepairService/pages/updateMasterApplication");
 		
 		managerURI.addAll(masterURI);
-		managerURI.add("/repairService/pages/addMalfunctionType");
-		managerURI.add("/repairService/pages/showAddMalfunctionType");
-		managerURI.add("/repairService/pages/allUsers");
-		managerURI.add("/repairService/pages/allApplications");
-		managerURI.add("/repairService/pages/showDeleteApplication");
-		managerURI.add("/repairService/pages/deleteApplication");
-		managerURI.add("/repairService/pages/showSelectManagerApplication");
-		managerURI.add("/repairService/pages/showUpdateManagerApplication");
-		managerURI.add("/repairService/pages/updateManagerApplication");
-		managerURI.add("/repairService/pages/addMalfunctionType");
+		managerURI.add("/RepairService/pages/addMalfunctionType");
+		managerURI.add("/RepairService/pages/showAddMalfunctionType");
+		managerURI.add("/RepairService/pages/allUsers");
+		managerURI.add("/RepairService/pages/allApplications");
+		managerURI.add("/RepairService/pages/showDeleteApplication");
+		managerURI.add("/RepairService/pages/deleteApplication");
+		managerURI.add("/RepairService/pages/showSelectManagerApplication");
+		managerURI.add("/RepairService/pages/showUpdateManagerApplication");
+		managerURI.add("/RepairService/pages/updateManagerApplication");
+		managerURI.add("/RepairService/pages/addMalfunctionType");
 
 		adminURI.addAll(managerURI);
-		adminURI.add("/repairService/pages/showDeleteReview");
-		adminURI.add("/repairService/pages/deleteReview");
-		adminURI.add("/repairService/pages/showDeleteMalfunctionType");
-		adminURI.add("/repairService/pages/deleteMalfunctionType");
-		adminURI.add("/repairService/pages/showDeleteUser");
-		adminURI.add("/repairService/pages/deleteUser");
-		adminURI.add("/repairService/pages/showChangeRole");
-		adminURI.add("/repairService/pages/changeUserRole");
+		adminURI.add("/RepairService/pages/showDeleteReview");
+		adminURI.add("/RepairService/pages/deleteReview");
+		adminURI.add("/RepairService/pages/showDeleteMalfunctionType");
+		adminURI.add("/RepairService/pages/deleteMalfunctionType");
+		adminURI.add("/RepairService/pages/showDeleteUser");
+		adminURI.add("/RepairService/pages/deleteUser");
+		adminURI.add("/RepairService/pages/showChangeRole");
+		adminURI.add("/RepairService/pages/changeUserRole");
 
 	}
 
